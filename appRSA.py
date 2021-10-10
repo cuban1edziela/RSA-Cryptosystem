@@ -55,38 +55,38 @@ def euclideanAlgoritm():
 
 
 
-    # elif (intA == intB):
-    #     print("GCD of", "[", + intA, ";", + intB, "]", "is equal to: ", + intA)
+    elif (intA == intB):
+        print("GCD of", "[", + intA, ";", + intB, "]", "is equal to: ", + intA)
     
 
 
 
 
-    # else:
-    #       whatleft = (intB % intA) #reszta z dzielenia
-    #     a = intA
-    #     b = intB
-    #     gcdterm = 0
+    else:
+          whatleft = (intB % intA) #reszta z dzielenia
+        a = intA
+        b = intB
+        gcdterm = 0
 
-    #     if(whatleft != 0):                                           #for numbers when a mod b is not equal to 0
+        if(whatleft != 0):                                           #for numbers when a mod b is not equal to 0
 
-    #         while(whatleft > 0):
-    #             print(whatleft)
-    #             a = whatleft
-    #             whatleft = (b % a)
-    #             b = a
+            while(whatleft > 0):
+                print(whatleft)
+                a = whatleft
+                whatleft = (b % a)
+                b = a
 
-    #             if(whatleft == 0):
-    #                 gcd = gcdterm
+                if(whatleft == 0):
+                    gcd = gcdterm
 
-    #             gcdterm = whatleft
+                gcdterm = whatleft
                 
                 
-    #         print("GCD of", "[", + intA, ";", + intB, "]", "is equal to: ", + gcd)
+            print("GCD of", "[", + intA, ";", + intB, "]", "is equal to: ", + gcd)
 
-    #     else:
-    #         gcd = (b/a)
-    #         print("GCD of", "[", + intA, ";", + intB, "]", "is equal to: ", + b)
+        else:
+            gcd = (b/a)
+            print("GCD of", "[", + intA, ";", + intB, "]", "is equal to: ", + b)
           
         
         
