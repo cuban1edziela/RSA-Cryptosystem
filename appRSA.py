@@ -66,6 +66,8 @@ def coprimeChecker():
 
         intB = random.randint(1, 10000)
 
+
+
         whatleft = (intA % intB) 
         a = whatleft
         b = intB
@@ -88,14 +90,74 @@ def coprimeChecker():
 
     print("number", +p, "and", +q, "are coprime bc their gcd =", +gcd)
     
+
+def primeGeneratorUSER():
+
+    integer = random.randint(1000, 100000)
+    dev = 2
+
+
+    while(dev != integer):
+
+        left = integer % dev 
+
+        if(left == 0):  
+           # print("wrong number was", +integer)                    #it regenerates the number when a number mod int is equal to 0
+            integer = random.randint(1000, 100000)
+            dev = 1
             
-    
+        
+        dev = dev + 1
         
 
+        if(dev == integer):
+            print("Your generated prime number is", +integer)
+            break
+
+
+
+def primeGeneratorNUMBER():
+
+    integer = random.randint(1000, 100000)
+    dev = 2
+
+
+    while(dev != integer):
+
+        left = integer % dev 
+
+        if(left == 0):  
+           # print("wrong number was", +integer)                    #it regenerates the number when a number mod int is equal to 0
+            integer = random.randint(1000, 100000)
+            dev = 1
+            
+        
+        dev = dev + 1
+        
+
+        if(dev == integer):
+            return integer
+            break
 
 
 
 
- 
+#Program beginning
 
-coprimeChecker()
+
+p = primeGeneratorNUMBER()
+q = primeGeneratorNUMBER()
+
+print(p, "and", +q)
+            
+        
+
+    
+
+
+    
+    
+
+    
+    
+
