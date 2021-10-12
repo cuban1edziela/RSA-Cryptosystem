@@ -1,8 +1,9 @@
 #Project of the RSA cryptography system
-#Last edit: 10.10.2021, Sunday
+#Last edit: 11.10.2021, Monday
 
 
 import math
+import random
 
 
 def euclideanAlgoritm():
@@ -54,7 +55,47 @@ def euclideanAlgoritm():
 
 
 
+def coprimeChecker():
+
+    gcd = int
+
+    while(gcd != 1):
+
+
+        intA = random.randint(1, 10000)                                #generate a random number. range must be changed at least 2k digit number 
+
+        intB = random.randint(1, 10000)
+
+        whatleft = (intA % intB) 
+        a = whatleft
+        b = intB
+        gcdterm = 0
+
+        if(whatleft != 0):                                           #for numbers when a mod b is not equal to 0
+
+            while(whatleft > 0):
+                
+                whatleft = (b % a)
+                b = a
+
+                if(whatleft == 0):
+                    gcd = a             
+                
+                a = whatleft
+
+    p = intA
+    q = intB
+
+    print("number", +p, "and", +q, "are coprime bc their gcd =", +gcd)
+    
+            
+    
+        
+
+
+
+
 
  
-euclideanAlgoritm()
 
+coprimeChecker()
