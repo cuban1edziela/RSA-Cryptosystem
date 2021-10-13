@@ -182,6 +182,73 @@ def primeGeneratorUSER():
             print("Your generated prime number is", +integer)
             break
 
+def inverseCalculator(a, b):
+    # a is the number you want the inverse for
+    # b is the modulus
+
+    r = -1
+    B = b
+    A = a
+    eq_set = []
+    full_set = []
+    mod_set = []
+
+    #euclid's algorithm
+    while r!=1 and r!=0:
+        r = b%a
+        q = b//a
+        eq_set = [r, b, a, q*-1]
+        b = a
+        a = r
+        full_set.append(eq_set)
+
+    for i in range(0, 4):
+        mod_set.append(full_set[-1][i])
+
+    mod_set.insert(2, 1)
+    counter = 0
+
+    #extended euclid's algorithm
+    for i in range(1, len(full_set)):
+        if counter%2 == 0:
+            mod_set[2] = full_set[-1*(i+1)][3]*mod_set[4]+mod_set[2]
+            mod_set[3] = full_set[-1*(i+1)][1]
+
+        elif counter%2 != 0:
+            mod_set[4] = full_set[-1*(i+1)][3]*mod_set[2]+mod_set[4]
+            mod_set[1] = full_set[-1*(i+1)][1]
+
+        counter += 1
+
+    if mod_set[3] == B:
+        return mod_set[2]%B
+    return mod_set[4]%B
+
+
+    # f=int(input("eneter 1st number"))
+    # g=int(input("enter 2nd number"))
+
+
+    # remainders = []
+    # devisors = []
+    # x = g                                       #g, the second value is the numver which we want to find inverse of
+
+    # d, r = divmod(f,g)
+
+    # while(r != 0):
+    #     d, r = divmod(f,g)
+        
+    #     devisors.append(d)                                        #saving the values into lists 
+    #     remainders.append(r)
+
+    #     f = (f-r)//d
+    #     g = r
+
+
+        
+    # print(devisors, "and", remainders, )
+
+
 
 
 
@@ -208,44 +275,6 @@ def primeGeneratorNUMBER():
         if(dev == integer):
             return integer
             break
-
-
-
-
-def inverseCalculator(u, y):
-    intA = u
-
-    intB = y
-
- 
-
-    whatleft = (intA % intB) #reszta z dzielenia
-    a = whatleft
-    b = intB
-    gcdterm = 0
-    
-    if(whatleft != 0):                                           #for numbers when a mod b is not equal to 0
-
-        while(whatleft > 0):
-            
-            whatleft = (b % a)
-            b = a
-
-            if(whatleft == 0):
-                gcd = a             
-            
-            a = whatleft
-    
-            
-        print("GCD of", "[", + intA, ";", + intB, "]", "is equal to: ", + gcd)
-
-    else:
-        gcd = (a/b)
-        print("GCD of", "[", + intA, ";", + intB, "]", "is equal to: ", + b)
-
-
-
-
 
 
 
@@ -292,10 +321,10 @@ print("K = (", n, ",", e, ")")                      #enciphering key consists of
 
 phiofn = (p_1 - 1) * (q_1 - 1)
 
-d = ((1/e) % phiofn)                                  #calculate the inverse of 'e' mod phi of n
+d = (inverseCalculator(e, phiofn))                                  #calculate the inverse of 'e' mod phi of n
 
-print("the d number is equal to", d)
-
+print("YOUR DECIPHERING KEY IS:") 
+print("K = (", n, ",", d, ")")   
 
     
     
