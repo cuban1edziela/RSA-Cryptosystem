@@ -1,56 +1,11 @@
 #Project of the RSA cryptography system
-#Last edit: 12.10.2021, Tusday
+#Last edit: 18.10.2021, Monday
 
 
 import math
 import random
 
 
-def euclideanAlgoritmUSER():
-
-    print("Enter the first integer: ")              #enering value of integers
-    intA = int(input())
-
-    while(intA == 0):                                 #check whether the value is not equal to 0                
-        print("Invalid value of integer. Number cannot be equal to 0")
-        print("Enter the valid value of the first integer: ") 
-        intA = int(input())
-
-
-
-    print("Enter the second integer: ")
-    intB = int(input())
-
-    while(intB == 0):
-        print("Invalid value of integer. Number cannot be equal to 0")
-        print("Enter the valid value of the second integer: ") 
-        intB = int(input())
-
-
-
-    whatleft = (intA % intB) #reszta z dzielenia
-    a = whatleft
-    b = intB
-    gcdterm = 0
-    
-    if(whatleft != 0):                                           #for numbers when a mod b is not equal to 0
-
-        while(whatleft > 0):
-            
-            whatleft = (b % a)
-            b = a
-
-            if(whatleft == 0):
-                gcd = a             
-            
-            a = whatleft
-    
-            
-        print("GCD of", "[", + intA, ";", + intB, "]", "is equal to: ", + gcd)
-
-    else:
-        gcd = (a/b)
-        print("GCD of", "[", + intA, ";", + intB, "]", "is equal to: ", + b)
 
 def euclideanAlgoritmNUMBER(f, g):
 
@@ -159,95 +114,12 @@ def coprimeCheckerE(k, e):
 
 
 
-def primeGeneratorUSER():
-
-    integer = random.randint(100, 1000)
-    dev = 2
-
-
-    while(dev != integer):
-
-        left = integer % dev 
-
-        if(left == 0):  
-           # print("wrong number was", +integer)                    #it regenerates the number when a number mod int is equal to 0
-            integer = random.randint(100, 1000)
-            dev = 1
-            
-        
-        dev = dev + 1
-        
-
-        if(dev == integer):
-            print("Your generated prime number is", +integer)
-            break
 
 def inverseCalculator(a, b):
-    # a is the number you want the inverse for
-    # b is the modulus
 
-    r = -1
-    B = b
-    A = a
-    eq_set = []
-    full_set = []
-    mod_set = []
+    inverse = pow(a, -1, b)
 
-    #euclid's algorithm
-    while r!=1 and r!=0:
-        r = b%a
-        q = b//a
-        eq_set = [r, b, a, q*-1]
-        b = a
-        a = r
-        full_set.append(eq_set)
-
-    for i in range(0, 4):
-        mod_set.append(full_set[-1][i])
-
-    mod_set.insert(2, 1)
-    counter = 0
-
-    #extended euclid's algorithm
-    for i in range(1, len(full_set)):
-        if counter%2 == 0:
-            mod_set[2] = full_set[-1*(i+1)][3]*mod_set[4]+mod_set[2]
-            mod_set[3] = full_set[-1*(i+1)][1]
-
-        elif counter%2 != 0:
-            mod_set[4] = full_set[-1*(i+1)][3]*mod_set[2]+mod_set[4]
-            mod_set[1] = full_set[-1*(i+1)][1]
-
-        counter += 1
-
-    if mod_set[3] == B:
-        return mod_set[2]%B
-    return mod_set[4]%B
-
-
-    # f=int(input("eneter 1st number"))
-    # g=int(input("enter 2nd number"))
-
-
-    # remainders = []
-    # devisors = []
-    # x = g                                       #g, the second value is the numver which we want to find inverse of
-
-    # d, r = divmod(f,g)
-
-    # while(r != 0):
-    #     d, r = divmod(f,g)
-        
-    #     devisors.append(d)                                        #saving the values into lists 
-    #     remainders.append(r)
-
-    #     f = (f-r)//d
-    #     g = r
-
-
-        
-    # print(devisors, "and", remainders, )
-
+    return inverse
 
 
 
@@ -278,15 +150,16 @@ def primeGeneratorNUMBER():
 
 
 
-
-
-
-
-
-
-
 #Program beginning
 
+
+
+#26-letter alphabet
+
+alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+cipheredMessage = []
+k = 3                                               # 3 letter plaintext message units 
+l = 4                                               # 4 letter cipghertext message units
 
 
 
@@ -311,7 +184,7 @@ e = ep
 
 #print("'e' for number", +p_1, "and number", +q_1, "equals", +e)   
 
-print("YOUR ENCIPHERING KEY IS:") 
+print("\n YOUR ENCIPHERING KEY IS:") 
 print("K = (", n, ",", e, ")")                      #enciphering key consists of number 'n' (two primes multiplied) and the found number 'e'
 
     
@@ -323,12 +196,83 @@ phiofn = (p_1 - 1) * (q_1 - 1)
 
 d = (inverseCalculator(e, phiofn))                                  #calculate the inverse of 'e' mod phi of n
 
-print("YOUR DECIPHERING KEY IS:") 
+print("\n YOUR DECIPHERING KEY IS:") 
 print("K = (", n, ",", d, ")")   
 
     
+
+
+
+
+#ENCIPHERING PROCESS
+
+message = input("\n \n Enter your message:")
+
+indicator = k
+stringCipheredMessage = ' '
+encipheringNumber = 0
+initialTextNumber = k -1
+k = initialTextNumber
+
+
+messageLength, remainder = divmod(len(message), 3)
+if(remainder != 0):
+    messageLength += 1
     
 
-    
-    
+messageList = [(message[i:i+indicator]) for i in range(0, len(message), indicator)]                 #dividing user's message into groups of 3 letters 
 
+
+for i in range(messageLength):
+
+    message = messageList[i]
+    encipheringNumber = 0    
+    multiplicative = 0                                                                    #recalling every group of 3 letters until the whole message is enciphered
+
+    print(message, indicator)
+
+
+    for i  in range(len(message)):                                  
+
+        index = alphabet.index(message[i])                              #recalling the number in alphabet list of chars entered by user 
+
+        multiplicative = len(alphabet)**k                               #length of used alphabet times number of plaintext units 
+
+        encipheringNumber = encipheringNumber + (index * multiplicative)        
+
+        if(k == 0):
+            k = initialTextNumber                                        #changing the exponent to its initial value if it gets to 0 in case of longer texts 
+        else:   
+            k = k -1
+
+
+
+
+
+    n = 46927                                                         #test key values
+    e = 39423
+
+
+    encipheringFunction = pow(encipheringNumber, e, n)                #evaluating the enciphering function
+
+
+    z = l - 1                                                         #new variable 'z' exponent gets value of ciphered text units -1 
+
+
+    for i in range(l):                                                  
+        
+        q, r = divmod(encipheringFunction, (len(alphabet)**z))        #deviding with remainder number evaluated by enciphering function, then for l letter ciphertext units 
+
+        cipheredMessage.append(alphabet[q])
+
+        z = z - 1 
+        encipheringFunction = r
+
+
+
+for x in cipheredMessage:
+    stringCipheredMessage += x
+
+
+print(" \n Your enciphered message is:", stringCipheredMessage)
+print(" \n Don't forget to give your deciphering key to your recipent! ")
