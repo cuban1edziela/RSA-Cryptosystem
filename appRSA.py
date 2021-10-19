@@ -123,6 +123,13 @@ def inverseCalculator(a, b):
 
 
 
+def messageLength(message, length):
+    messageLength, remainder = divmod(len(message), length)
+    if(remainder != 0):
+        messageLength += 1
+        return messageLength
+    return messageLength
+
 
 
 def primeGeneratorNUMBER():
@@ -181,13 +188,10 @@ while(ep != eq):                                    #generate two prime numbers 
 
 e = ep
 
-
 #print("'e' for number", +p_1, "and number", +q_1, "equals", +e)   
 
 print("\n YOUR ENCIPHERING KEY IS:") 
-print("K = (", n, ",", e, ")")                      #enciphering key consists of number 'n' (two primes multiplied) and the found number 'e'
-
-    
+print("K = (n =", n, ",", "e =", e, ")")                      #enciphering key consists of number 'n' (two primes multiplied) and the found number 'e'
 
 
 #DECIPHERING KEY (SECRET)
@@ -197,13 +201,9 @@ phiofn = (p_1 - 1) * (q_1 - 1)
 d = (inverseCalculator(e, phiofn))                                  #calculate the inverse of 'e' mod phi of n
 
 print("\n YOUR DECIPHERING KEY IS:") 
-print("K = (", n, ",", d, ")")   
+print("K = (n =", n, ",","d =", d, ")")   
 
     
-
-
-
-
 #ENCIPHERING PROCESS
 
 message = input("\n \n Enter your message:")
@@ -214,23 +214,16 @@ encipheringNumber = 0
 initialTextNumber = k -1
 k = initialTextNumber
 
-
-messageLength, remainder = divmod(len(message), 3)
-if(remainder != 0):
-    messageLength += 1
-    
+messagelength = messageLength(message, 3)   
 
 messageList = [(message[i:i+indicator]) for i in range(0, len(message), indicator)]                 #dividing user's message into groups of 3 letters 
 
 
-for i in range(messageLength):
+for i in range(messagelength):
 
     message = messageList[i]
     encipheringNumber = 0    
     multiplicative = 0                                                                    #recalling every group of 3 letters until the whole message is enciphered
-
-    print(message, indicator)
-
 
     for i  in range(len(message)):                                  
 
@@ -245,19 +238,13 @@ for i in range(messageLength):
         else:   
             k = k -1
 
-
-
-
-
-    n = 46927                                                         #test key values
-    e = 39423
-
+    
 
     encipheringFunction = pow(encipheringNumber, e, n)                #evaluating the enciphering function
 
+    print("your umber is equal: ", encipheringFunction)
 
     z = l - 1                                                         #new variable 'z' exponent gets value of ciphered text units -1 
-
 
     for i in range(l):                                                  
         
@@ -265,7 +252,7 @@ for i in range(messageLength):
 
         cipheredMessage.append(alphabet[q])
 
-        z = z - 1 
+        z -=  1 
         encipheringFunction = r
 
 
@@ -276,3 +263,38 @@ for x in cipheredMessage:
 
 print(" \n Your enciphered message is:", stringCipheredMessage)
 print(" \n Don't forget to give your deciphering key to your recipent! ")
+
+
+
+#DECIPHERING
+
+USERciphermessage = input("Enter a message you want to decipher: ")                   #entering the required values
+n = int(input("\n Enter the 'n' value of the key:"))
+d = int(input("\n Enter the 'd' value of the key:"))
+
+ciphermessageList = [(USERciphermessage[i:i+l]) for i in range(0, len(USERciphermessage), l)] 
+
+
+ciphermessagelength = messageLength(USERciphermessage, 4)
+
+cipherednumber = 0
+
+ciphermessage = ' '
+
+for i in range(ciphermessagelength):
+    ciphermessage = ciphermessageList[i]
+    cipherednumber = 0
+    
+    
+    z = l - 1   
+
+    
+    for x in range(len(ciphermessage)):
+        index = alphabet.index(ciphermessage[x])
+        cipherednumber += (index * (len(alphabet)**z))
+        z -= 1                          
+
+    
+    decipherednumber = pow(cipherednumber, d, n)
+
+print(cipherednumber)
