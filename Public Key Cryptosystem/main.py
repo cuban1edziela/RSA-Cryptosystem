@@ -1,7 +1,7 @@
 from Functions import *
 from Variables import *
 
-print("Welcome to Public Key Cryptosystem Program.")
+print("\n Welcome to Public Key Cryptosystem Program by Kuba Niedziela")
 print("\n If you want to encipher a message press 0 and ENTER, to decipher, press 1 and ENTER")
 check_user = int(input())
 
