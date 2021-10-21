@@ -58,9 +58,9 @@ for i in range(messageLength(message, indicator)):
     message = messageList[i]                             #enciphering each letter at the time by getting its index and calculating ciphered number
     encipheringNumber = 0                                #detailed information on how the system works can be found in RSA math description on the web
                                                                      
-    for i  in range(len(message)):                                  
+    for x in range(len(message)):                                  
 
-        index = alphabet.index(message[i])                                                            
+        index = alphabet.index(message[x])                                                            
 
         encipheringNumber = encipheringNumber + (index * (len(alphabet)**k))        
 
@@ -73,14 +73,14 @@ for i in range(messageLength(message, indicator)):
 
     z = l - 1                                             #new variable 'z' exponent gets value of ciphered text units -1 
 
-    for i in range(l):                                                  
+    for s in range(l):                                                  
         q, r = divmod(encipheringFunction, (len(alphabet)**z))        
 
         if(q > len(alphabet)):                            #deviding with remainder number evaluated by enciphering function, then for l letter ciphertext units 
             q = pow(q, 1, len(alphabet))
 
         ciphered_message.append(alphabet[q])
-        z -=  1 
+        z =  z -1 
         encipheringFunction = r
 
 

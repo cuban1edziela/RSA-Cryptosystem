@@ -15,4 +15,4 @@ if(check_user == 0):
 if(check_user == 1):
     import deciphering
 
-print("Thank you for using Public Key Cryptosystem Program")
+print("\n Thank you for using Public Key Cryptosystem Program")
